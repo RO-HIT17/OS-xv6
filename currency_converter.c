@@ -1,10 +1,8 @@
-// currency_converter.c
 
 #include "types.h"
 #include "stat.h"
 #include "user.h"
 
-// System call prototype
 int currency_convert(char from_currency, char to_currency, int amount);
 
 int main(int argc, char *argv[]) {

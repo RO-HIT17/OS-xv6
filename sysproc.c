@@ -8,17 +8,19 @@
 #include "proc.h"
 
 
-#define USD_TO_INR 74.5
+#define USD_TO_INR 76.92
 #define INR_TO_USD 0.013
 #define USD_TO_EUR 0.85
 #define EUR_TO_USD 1.18
+#define EUR_TO_INR 96.33
+#define INR_TO_EUR 0.0104
 
 #define MAX_TASKS 100
 #define MAX_TASK_LEN 64
 
 struct task {
     char description[MAX_TASK_LEN];
-    int done;  // 0 = pending, 1 = done
+    int done;  
 };
 
 struct task todo_list[MAX_TASKS];
@@ -34,7 +36,7 @@ int
 sys_exit(void)
 {
   exit();
-  return 0;  // not reached
+  return 0;  
 }
 
 int
@@ -110,7 +112,7 @@ sys_uptime(void)
 int sys_currency_convert(void) {
   char from_currency;
   char to_currency;
-  int amount;  // Use int for simplicity
+  int amount;  
   int result = 0;
 
   if (argint(0, (int*)&from_currency) < 0 ||
@@ -127,8 +129,13 @@ int sys_currency_convert(void) {
       result = amount * USD_TO_EUR;
   } else if (from_currency == 'E' && to_currency == 'U') {
       result = amount * EUR_TO_USD;
-  } else {
-      return -1; // Invalid conversion
+  } else if (from_currency == 'E' && to_currency == 'I') {
+    result = amount * EUR_TO_INR;
+  } else if (from_currency == 'I' && to_currency == 'E') {
+    result = amount * INR_TO_EUR;
+  }
+  else {
+      return -1; 
   }
 
   return result;

@@ -2,12 +2,11 @@
 #include "stat.h"
 #include "user.h"
 
-// Declare system calls
 int todo_add(char *desc);
 int todo_list(void);
 int todo_done(int id);
 
-// Custom strcat implementation
+
 void strcat(char *dest, const char *src) {
     while (*dest) {  
         dest++;
@@ -33,12 +32,12 @@ int main(int argc, char *argv[]) {
         }
 
         char desc[512];
-        desc[0] = '\0';  // Start with empty string
+        desc[0] = '\0';  
 
         for (int i = 2; i < argc; i++) {
             strcat(desc, argv[i]);
             if (i != argc - 1) {
-                strcat(desc, " ");  // Add space between words
+                strcat(desc, " ");  
             }
         }
 
